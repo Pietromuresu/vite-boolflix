@@ -1,4 +1,5 @@
 <script>
+import { store } from './assets/data/Store';
 import axios from '../node_modules/axios';
 
 import Header from './components/Header.vue'
@@ -15,16 +16,34 @@ export default {
   },
   data(){
     return{
-      axios
+      axios,
+      store
     }
+  },
+  methods: {
+    getApi(){
+      axios.get(store.apiUrlSearch, {
+        params:{
+          query: store.searchedMovies,
+          page: store.counter
+        }
+      })
+        .then(result => {
+          store.popularMovies = result.data.results
+          console.log(store.popularMovies);
+        })
+    }
+  },
+  mounted(){
+    this.getApi()
   }
 }
 </script>
 
 <template>
   <Header/>
-  <Search/>
-  <Main/>
+  <Search @startSearch="this.getApi"/>
+  <Main />
   <Footer/>
 </template>
 
