@@ -12,7 +12,8 @@ export default {
     Header,
     Footer,
     Main,
-    Search
+    Search,
+
   },
   data(){
     return{
@@ -22,7 +23,15 @@ export default {
   },
   methods: {
     getApi(){
-      axios.get(store.apiUrlSearch, {
+      if(store.filterBy === 'all'){
+        store.apiUrl = store.apiUrlSearchAll
+      }else if(store.filterBy === 'movie'){
+        store.apiUrl = store.apiUrlSearchMovie
+      }else {
+        store.apiUrl = store.apiUrlSearchTV
+      }
+
+      axios.get(store.apiUrl, {
         params:{
           query: store.searchedMovies,
           page: store.counter
@@ -30,7 +39,10 @@ export default {
       })
         .then(result => {
           store.popularMovies = result.data.results
+          
           console.log(store.popularMovies);
+          
+          
         })
     }
   },

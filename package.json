@@ -12,7 +12,8 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "scss": "^0.2.4",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "vue-country-flag-next": "^2.3.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
