@@ -1,38 +1,62 @@
 
-<script>
+  <script>
 
 
-export default {
-name: 'Card',
-components:{
+  export default {
+  name: 'Card',
+  data(){
+    return{
+      isDef: true
+    }
+  },
+  components:{
 
-},
-mounted(){
-},
-
-props:{
-    title: String,
-    originalTitle: String,
-    lang: String,
-    votes: Number
+  },
+  methods: {
+  isLangDefined(){
+  if(this.lang === 'xx'){
+    this.isDef = false
+  }else{
+    this.isDef = true
   }
-}
-</script>
+  }
+  },
+  mounted(){
+    this.isLangDefined()
+    console.log(this.lang
+    );
+  },
 
-<template>
-   <div class="p-card" >
-      <h3>Title: {{ title }} </h3>
-      <h5>Original Title:{{ originalTitle }}</h5>
-      <h5> Language: <img :src="lang" alt="">  </h5>
-      <h5>Votes:{{ votes }}</h5>
-      
-      <hr>
+  props:{
+      title: String,
+      originalTitle: String,
+      lang: String,
+      votes: Number
+    }
+  }
+  </script>
+
+  <template>
+    <div class="col " >
+      <div class="p-card mx-auto text-center">
+
+        <p> {{ title }} </p>
+        <p>{{ originalTitle }}</p>
+        <p v-if="isDef"> Lang: <img  :src="`../../public/img/flags/language-${lang}.svg`" alt="">   </p>
+        <p v-else><span >{{ lang }}</span></p>
+        <p> Rates: {{ votes }}</p>  
+        
+      </div>
     </div>
-    
-</template>
+      
+  </template>
 
-<style lang="scss" scoped>
-  img{
-    height: 16px;
+  <style lang="scss" scoped>
+  .p-card{
+      height: 300px;
+      width: 250px;
+    img{
+      height: 16px;
+    }
   }
-</style>
+  </style>

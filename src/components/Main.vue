@@ -37,12 +37,12 @@ export default {
 </script>
 
 <template>
-  <div class="pm-card-container">
+  <div class="container mx-auto row mt-5 ">
     <Card
       
       v-for="movie in store.popularMovies"
       :key="movie.id"
-      :lang="`../../public/img/flags/language-${movie.original_language}.svg`"
+      :lang="movie.original_language"
       :originalTitle="getRightOriginalName(movie)"
       :title="getRightName(movie)"
       :votes="movie.vote_average" />
