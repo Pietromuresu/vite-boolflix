@@ -19,15 +19,17 @@
   }else{
     this.isDef = true
   }
-  }
+  },
+
+  
   },
   mounted(){
     this.isLangDefined()
-    console.log(this.lang
-    );
+
   },
 
   props:{
+      backdrop: String,
       title: String,
       originalTitle: String,
       lang: String,
@@ -39,10 +41,10 @@
   <template>
     <div class="col " >
       <div class="p-card mx-auto text-center">
-
+        <img class="poster" :src="backdrop" alt="">
         <p> {{ title }} </p>
         <p>{{ originalTitle }}</p>
-        <p v-if="isDef"> Lang: <img  :src="`../../public/img/flags/language-${lang}.svg`" alt="">   </p>
+        <p v-if="isDef"> Lang: <img class="countryFlag" :src="`/img/flags/language-${lang}.svg`" alt="">   </p>
         <p v-else><span >{{ lang }}</span></p>
         <p> Rates: {{ votes }}</p>  
         
@@ -53,9 +55,12 @@
 
   <style lang="scss" scoped>
   .p-card{
+
       height: 300px;
       width: 250px;
-    img{
+      margin-bottom: 20px ;
+      line-height: 16px;
+    .countryFlag{
       height: 16px;
     }
   }

@@ -42,6 +42,7 @@ export default {
       
       v-for="movie in store.popularMovies"
       :key="movie.id"
+      :backdrop="`https://image.tmdb.org/t/p/w92${movie.poster_path}`"
       :lang="movie.original_language"
       :originalTitle="getRightOriginalName(movie)"
       :title="getRightName(movie)"
