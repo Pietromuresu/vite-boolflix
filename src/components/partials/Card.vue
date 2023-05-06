@@ -60,6 +60,9 @@
       width: 250px;
       margin-bottom: 20px ;
       line-height: 16px;
+      .poster{
+        max-width: 92px;
+      }
     .countryFlag{
       height: 16px;
     }

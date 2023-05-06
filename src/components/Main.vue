@@ -10,7 +10,8 @@ export default {
     return{
       store,
       title: '',
-      originalTitle: ''
+      originalTitle: '',
+      stars: 0
     }
   },
   methods: {
@@ -30,8 +31,25 @@ export default {
           this.originalTitle = movie.original_name
       }
       return this.originalTitle
-    }
+    },  
+
+    getImage(movie){
+      if(!movie.poster_path){
+        return `/img/not-available-clipart-12.jpeg`
+      }else {
+        return `https://image.tmdb.org/t/p/w92${movie.poster_path}`
+      }
+    },
+
+    getStars(movie){
+    this.stars = Math(math.floor(movie.vote_average / 2))
+    console.log(this.stars);
+
+    },
   },
+
+
+
 
 }
 </script>
@@ -42,11 +60,11 @@ export default {
       
       v-for="movie in store.popularMovies"
       :key="movie.id"
-      :backdrop="`https://image.tmdb.org/t/p/w92${movie.poster_path}`"
+      :backdrop="getImage(movie)"
       :lang="movie.original_language"
       :originalTitle="getRightOriginalName(movie)"
       :title="getRightName(movie)"
-      :votes="movie.vote_average" />
+      :votes="stars" />
     
    
   </div>
