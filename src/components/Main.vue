@@ -2,6 +2,8 @@
 import {store} from '../assets/data/Store';
 import Card from './partials/Card.vue';
 
+
+
 export default {
   name: 'Main', 
   components: {
@@ -54,7 +56,7 @@ export default {
 
       return store.starred
     },
-    
+
     cleanStars(){
       store.starred = ''
     }
@@ -70,8 +72,10 @@ export default {
 </script>
 
 <template>
-  <div class="container mx-auto row mt-5 ">
-    <Card
+  <main>
+
+    <div class="container mx-auto row pt-5 ">
+      <Card
       
       v-for="movie in store.popularMovies"
       :key="movie.id"
@@ -81,12 +85,21 @@ export default {
       :title="getRightName(movie)"
       :votes="getStars(movie)"
       :stars="cleanStars()"
-        />
-    
-   
-  </div>
+      />  
+    </div>
+  </main>
 </template>
 
 <style lang="scss" scoped>
+@use '../scss/partials/vars' as *;
+main{
+  background-color: $card-container-bg;
+  min-height: calc(100vh - 80px);
+  padding-top: 80px;
+
+  .container{
+    color: white;
+  }
+}   
 
 </style>
