@@ -54,6 +54,7 @@ export default {
 
       return store.starred
     },
+    
     cleanStars(){
       store.starred = ''
     }
