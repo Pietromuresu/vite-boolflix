@@ -1,6 +1,7 @@
 <script>
 import {store} from '../assets/data/Store';
 import Card from './partials/Card.vue';
+
 export default {
   name: 'Main', 
   components: {
@@ -11,7 +12,8 @@ export default {
       store,
       title: '',
       originalTitle: '',
-      stars: 0
+
+      
     }
   },
   methods: {
@@ -42,11 +44,23 @@ export default {
     },
 
     getStars(movie){
-    this.stars = Math(math.floor(movie.vote_average / 2))
-    console.log(this.stars);
+    store.stars = Math.ceil(movie.vote_average / 2)
 
+    for(let i = 0; i < store.stars ; i++){
+      store.starred += '★'
+      
+    } 
+    console.log(store.starred)
+
+      return store.starred
     },
+    cleanStars(){
+      store.starred = ''
+    }
   },
+  mounted(){
+
+  }
 
 
 
@@ -64,7 +78,9 @@ export default {
       :lang="movie.original_language"
       :originalTitle="getRightOriginalName(movie)"
       :title="getRightName(movie)"
-      :votes="stars" />
+      :votes="getStars(movie)"
+      :stars="cleanStars()"
+        />
     
    
   </div>

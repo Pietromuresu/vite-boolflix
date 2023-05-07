@@ -1,12 +1,14 @@
 
   <script>
 
-
+  import {store} from '../../assets/data/Store'
   export default {
   name: 'Card',
   data(){
     return{
-      isDef: true
+      store,
+      isDef: true,
+      
     }
   },
   components:{
@@ -21,19 +23,21 @@
   }
   },
 
-  
   },
+  
   mounted(){
     this.isLangDefined()
-
+  
   },
+
 
   props:{
       backdrop: String,
       title: String,
       originalTitle: String,
       lang: String,
-      votes: Number
+      votes: String,
+      stars: String
     }
   }
   </script>
@@ -46,7 +50,9 @@
         <p>{{ originalTitle }}</p>
         <p v-if="isDef"> Lang: <img class="countryFlag" :src="`/img/flags/language-${lang}.svg`" alt="">   </p>
         <p v-else><span >{{ lang }}</span></p>
-        <p> Rates: {{ votes }}</p>  
+        <p > Rates: <span>{{ votes }}</span></p>  
+        <span>{{ stars }}</span>  
+       
         
       </div>
     </div>

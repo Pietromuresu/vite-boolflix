@@ -9,11 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "scss": "^0.2.4",
     "vue": "^3.2.47",
-    "vue-country-flag-next": "^2.3.2"
+    "vue-country-flag-next": "^2.3.2",
+    "vue-star-rating": "^1.7.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
