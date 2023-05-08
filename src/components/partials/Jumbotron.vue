@@ -35,11 +35,16 @@ export default {
     higherVotes(){
       this.bestThree = [...store.popularMovies]
 
-      
-      this.bestThree.sort(function(a, b) {
-        return (a === b)? 0 : a ? +1 : -1;
+
+      this.bestThree.sort((a,b) => {
+        if(a.vote_average > b.vote_average){
+          return -1
+        }else if(a.vote_average === b.vote_average){
+          return 0
+        }else {
+          return +1
+        }
       })
-      
       console.log(this.bestThree.slice(0, 3));
       return this.bestThree.slice(0, 3)
       
