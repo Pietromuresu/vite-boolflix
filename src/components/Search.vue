@@ -14,7 +14,7 @@ export default {
   <div class="container-search-bar ">
     <label for="searchBar">
       <input
-        @keyup.enter="$emit('callStartSearch')"
+        @keyup.enter="$emit('callStartSearch'), store.isInHome = false"
         v-model="store.searchedMovies"
         type="text"
         placeholder="Cerca un film">

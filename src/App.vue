@@ -27,8 +27,10 @@ export default {
         store.apiUrl = store.apiUrlSearchAll
       }else if(store.filterBy === 'movie'){
         store.apiUrl = store.apiUrlSearchMovie
-      }else {
+      }else if(store.filterBy === 'tv'){
         store.apiUrl = store.apiUrlSearchTV
+      }else {
+        store.apiUrl = store.apiUrlPopular
       }
 
       axios.get(store.apiUrl, {
@@ -44,10 +46,12 @@ export default {
           
           
         })
+        store.searchedMovies = '';
+        store.filterBy = ''
     }
   },
   mounted(){
-    this.getApi()
+
   }
 }
 </script>
@@ -55,7 +59,7 @@ export default {
 <template>
   <Header @startSearch="this.getApi" />
   
-  <Main />
+  <Main @getApi="this.getApi" />
   <Footer/>
 </template>
 

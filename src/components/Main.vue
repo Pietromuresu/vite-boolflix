@@ -1,13 +1,15 @@
 <script>
-import {store} from '../assets/data/Store';
+import {store} from '../assets/data/store';
 import Card from './partials/Card.vue';
+import pmJumbotron from './partials/Jumbotron.vue'
 
 
 
 export default {
   name: 'Main', 
   components: {
-    Card
+    Card,
+    pmJumbotron
   },
   data(){
     return{
@@ -52,7 +54,6 @@ export default {
       store.starred += '★'
       
     } 
-    console.log(store.starred)
 
       return store.starred
     },
@@ -62,7 +63,7 @@ export default {
     }
   },
   mounted(){
-
+    this.$emit('getApi')
   }
 
 
@@ -73,12 +74,29 @@ export default {
 
 <template>
   <main>
+    <div v-if="store.isInHome" class="container-home row">
 
-    <div class="container mx-auto row pt-5 ">
+
       <Card
       
       v-for="movie in store.popularMovies"
       :key="movie.id"
+      
+      :backdrop="getImage(movie)"
+      :lang="movie.original_language"
+      :originalTitle="getRightOriginalName(movie)"
+      :title="getRightName(movie)"
+      :votes="getStars(movie)"
+      :stars="cleanStars()"
+      />  
+    </div>
+
+    <div v-else class="container mx-auto row pt-5 ">
+      <Card
+      
+      v-for="movie in store.popularMovies"
+      :key="movie.id"
+      
       :backdrop="getImage(movie)"
       :lang="movie.original_language"
       :originalTitle="getRightOriginalName(movie)"
@@ -94,11 +112,14 @@ export default {
 @use '../scss/partials/vars' as *;
 main{
   background-color: $card-container-bg;
-  min-height: calc(100vh - 80px);
-  padding-top: 80px;
+  min-height: 100vh;
+  padding-top: 130px;
 
-  .container{
+  .container, 
+  .container-home{
     color: white;
+
+    
   }
 }   
 
