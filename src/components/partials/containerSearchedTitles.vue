@@ -40,12 +40,13 @@ export default {
     },
 
     nextPrev(plusMinus){
-      if(plusMinus = 'next' ){
-        store.counter ++
-      }else if(plusMinus = 'prev' && store.counter !== 1 ) {
-        store.counter --
+      if(plusMinus === 'next' ){
+        store.counter += 1
+      }else if(plusMinus === 'prev' && store.counter !== 1 ) {
+        store.counter -= 1
       }
       console.log(store.counter);
+      console.log(store.apiUrl);
     }
   }
 }
@@ -73,7 +74,7 @@ export default {
     <div class="nextPrevContainer" >
       <div :class="{'d-none' : store.counter === 1}" @click="nextPrev('prev'), $emit('getApi')" class="btn me-3">Prev</div>
       <div class="btn me-3" :class="{'d-none' : store.counter <= 1}" @click="store.counter = 1, $emit('getApi')" >Back to page 1</div>
-      <div @click="nextPrev('next'), $emit('getApi')" class="btn">Next</div>
+      <div @click="nextPrev('next'), $emit('getApi')" :class="{'d-none' : store.counter === store.lastPage}" class="btn">Next</div>
     </div>
   </div>
 </template>

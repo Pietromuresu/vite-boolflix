@@ -13,6 +13,7 @@ export const store = reactive({
 
   searchedMovies: '',
   counter: 1,
+  lastPage: '',
   filterBy: '',
   stars: 0,
   starred: '',

@@ -46,6 +46,8 @@ export default {
         }
       })
         .then(result => {
+
+          store.lastPage = result.data.total_pages
           if(store.searchedMovies){
             store.searchedTitles = result.data.results
           }else if(store.searchedMovies == ''){
