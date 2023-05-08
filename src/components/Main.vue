@@ -86,36 +86,59 @@ export default {
     
     <h1 class="ms-5 mb-3">Popular Series</h1>
     <div v-if="store.isInHome" class="container-home mx-5  row">
-      <Card
-      v-for="movie in store.popularSeries"
-      :key="movie.id"
+      <Swiper
+      :slides-per-view="8"
+      :space-between="50"
+      @swiper="onSwiper"
+      @slideChange="onSlideChange"
       
-      :card="movie"
-      :backdrop="getImage(movie, '', movie.poster_path)"
-      :hovBackdrop="getImage(movie, 'poster', movie.backdrop_path)"
-      :lang="movie.original_language"
-      :description="movie.overview"
-      :votes="getStars(movie)"
-      :stars="cleanStars()"
-      />  
+      >
+        <swiper-slide class="swiperpm" v-for="movie in store.popularSeries"
+      :key="movie.id">
+
+          <Card
+          
+          
+          :card="movie"
+          :backdrop="getImage(movie, '', movie.poster_path)"
+          :hovBackdrop="getImage(movie, 'poster', movie.backdrop_path)"
+          :lang="movie.original_language"
+          :description="movie.overview"
+          :votes="getStars(movie)"
+          :stars="cleanStars()"
+          />  
+        </swiper-slide>
+      </Swiper>
       
     </div>
     
     <h1 class="ms-5 mb-3">Popular Movies</h1>
     <div v-if="store.isInHome" class="container-home mx-5  row">
       
-      <Card
-      v-for="movie in store.popularMovies"
-      :key="movie.id"
+      <Swiper
+      :slides-per-view="8"
+      :space-between="50"
+      @swiper="onSwiper"
+      @slideChange="onSlideChange"
       
-      :card="movie"
-      :backdrop="getImage(movie, '', movie.poster_path)"
-      :hovBackdrop="getImage(movie, 'poster', movie.backdrop_path)"
-      :lang="movie.original_language"
-      :description="movie.overview"
-      :votes="getStars(movie)"
-      :stars="cleanStars()"
-      />  
+      >
+        <swiper-slide class="swiperpm" v-for="movie in store.popularMovies"
+      :key="movie.id">
+
+          <Card
+          
+          
+          :card="movie"
+          :backdrop="getImage(movie, '', movie.poster_path)"
+          :hovBackdrop="getImage(movie, 'poster', movie.backdrop_path)"
+          :lang="movie.original_language"
+          :description="movie.overview"
+          :votes="getStars(movie)"
+          :stars="cleanStars()"
+          />  
+        </swiper-slide>
+      </Swiper>
+      
       
     </div>
     
@@ -152,7 +175,7 @@ main{
     flex-wrap: nowrap !important;
     
     .slide{
-      width: fit-content;
+      
       h3{
         color: rgb(183, 183, 183);
       }
@@ -162,6 +185,13 @@ main{
       }
     }
   }
+
+  .swiperpm{
+    &:hover{
+      z-index: 10;
+    }
+  }
+
 
 }   
 

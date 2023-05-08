@@ -44,7 +44,7 @@
   </script>
 
   <template>
-    <div class="col-2 " >
+    <div class=" " >
       <div class="pm-card mx-auto text-center"  >
 
         <div  class="basic-card">
@@ -93,9 +93,8 @@
 
       &:hover{
         transform: scale(1.1);
-
-        
         transition: 1s;
+        
         .basic-card{
           display: none;
         }
@@ -111,11 +110,11 @@
       .basic-card{
         p{
 
-              overflow: hidden;
-              white-space: nowrap;
-              text-overflow: ellipsis;
-              height: 20px;
-            }
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          height: 20px;
+        }
       }
 
       .hover-card{
@@ -132,6 +131,7 @@
         
         img{
           width: 100%;
+          max-height: 200px;
 
         }
 
