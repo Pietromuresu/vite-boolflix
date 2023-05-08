@@ -14,6 +14,7 @@ export default {
   <div class="container-search-bar ">
     <label for="searchBar">
       <input
+        
         @keyup.enter="$emit('callStartSearch'), store.isInHome = false"
         v-model="store.searchedMovies"
         type="text"
@@ -21,13 +22,12 @@ export default {
       
 
       <select class="mx-3" v-model="store.filterBy" name="filterBy" >
-        <option value="">Select a type</option>
-        <option value="all">All</option>
+        <option value="" selected>All</option>
         <option value="tv">Series</option>
         <option value="movie">Movie</option>
       </select>
       <div class="btn" @click="$emit('callStartSearch')" >
-        Invio
+        <i class="fa-solid fa-magnifying-glass"> </i>
       </div>
     </label>
 
@@ -46,7 +46,7 @@ export default {
     }
 
     .btn{
-      background: #e64752;
+      font-size: 20px;
       color: white;
       padding: 2px 10px;
       font-weight: bold;

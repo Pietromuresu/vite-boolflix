@@ -22,16 +22,18 @@ export default {
     }
   },
   methods: {
-    getApi(){
-      if(store.filterBy === 'all'){
+    getApi(type){
+      
+      if(type === ''){
         store.apiUrl = store.apiUrlSearchAll
-      }else if(store.filterBy === 'movie'){
+      }else if(type === 'movie'){
         store.apiUrl = store.apiUrlSearchMovie
-      }else if(store.filterBy === 'tv'){
+      }else if(type === 'tv'){
         store.apiUrl = store.apiUrlSearchTV
-      }else {
+      }else if (type === 'popular'){
         store.apiUrl = store.apiUrlPopular
       }
+      console.log((type));
 
       axios.get(store.apiUrl, {
         params:{
@@ -40,14 +42,10 @@ export default {
         }
       })
         .then(result => {
-          store.popularMovies = result.data.results
-          
+          store.popularMovies = result.data.results   
           console.log(store.popularMovies);
           
-          
         })
-        store.searchedMovies = '';
-        store.filterBy = ''
     }
   },
   mounted(){
@@ -57,9 +55,8 @@ export default {
 </script>
 
 <template>
-  <Header @startSearch="this.getApi" />
-  
-  <Main @getApi="this.getApi" />
+  <Header @startSearch="this.getApi(store.filterBy)" />
+  <Main @getApi="this.getApi('popular')" />
   <Footer/>
 </template>
 
