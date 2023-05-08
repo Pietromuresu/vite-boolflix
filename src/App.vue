@@ -66,7 +66,7 @@ export default {
 </script>
 
 <template>
-  <Header @getApi="this.getApi('popularMovies'), store.searchedMovies= '', store.filterBy=''"  @startSearch="this.getApi(store.filterBy)" />
+  <Header @getApi="this.getApi('popularMovies'), store.searchedMovies= '', store.filterBy='', store.isInHome = true"  @startSearch="this.getApi(store.filterBy)" />
   <Main @getMovies="this.getApi('popularMovies')" @getSeries="this.getApi('popularSeries')" />
   <Footer/>
 </template>

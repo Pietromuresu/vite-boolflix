@@ -30,6 +30,7 @@ export default {
     width: 100%;
     background-color: $header-bg;
     box-shadow: 0 0 5px black;
+    z-index: 10 !important;
     .logo-container{
 
       img{

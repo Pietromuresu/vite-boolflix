@@ -2,14 +2,16 @@
 import {store} from '../assets/data/store';
 import Card from './partials/Card.vue';
 import pmJumbotron from './partials/Jumbotron.vue'
-
+import { Swiper, SwiperSlide } from 'swiper/vue';
 
 
 export default {
   name: 'Main', 
   components: {
     Card,
-    pmJumbotron
+    pmJumbotron,
+    Swiper,
+    SwiperSlide
   },
   data(){
     return{
@@ -29,7 +31,7 @@ export default {
       }else if(img === ''){
         return `https://image.tmdb.org/t/p/w92${movie.poster_path}`
       }else if(img === 'poster'){
-        return `https://image.tmdb.org/t/p/w342${movie.backdrop_path}`
+        return `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
 
       }
     },
@@ -63,22 +65,25 @@ export default {
 <template>
 
   <main>
-    <div v-if="store.isInHome" class="container-home mx-5  row">
+    <div v-if="store.isInHome" class="container-home mx-5 row">
+      <Swiper
+      :slides-per-view="1.5"
+      :space-between="50"
+      @swiper="onSwiper"
+      @slideChange="onSlideChange"
+      >
 
-      <Card
-      v-for="movie in store.popularMovies"
-      :key="movie.id"
-      
-      :card="movie"
-      :backdrop="getImage(movie, '', movie.poster_path)"
-      :hovBackdrop="getImage(movie, 'poster', movie.backdrop_path)"
-      :lang="movie.original_language"
-      :description="movie.overview !== '' || 'no desc'"
-      :votes="getStars(movie)"
-      :stars="cleanStars()"
-      />  
-      
+        <swiper-slide class="slide position-relative d-flex align-items-end " v-for="movie in store.popularMovies"
+        :key="movie.id">
+        
+        <img :src="getImage(movie, 'poster', movie.backdrop_path)" alt="">
+        <h3 class="position-absolute ms-3 "> {{ movie.title  }}</h3>
+        </swiper-slide>
+        
+      </Swiper>
     </div>
+      
+    
     <h1 class="ms-5 mb-3">Popular Series</h1>
     <div v-if="store.isInHome" class="container-home mx-5  row">
       <Card
@@ -142,9 +147,20 @@ main{
   padding-top: 130px;
   color: white;
 
-  .container-searched,
+
   .container-home{
     flex-wrap: nowrap !important;
+    
+    .slide{
+      width: fit-content;
+      h3{
+        color: rgb(183, 183, 183);
+      }
+      img{
+        z-index: 0;
+        height: 50vh;
+      }
+    }
   }
 
 }   
