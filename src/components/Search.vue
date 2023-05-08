@@ -15,7 +15,7 @@ export default {
     <label for="searchBar">
       <input
         
-        @keyup.enter="$emit('callStartSearch'), store.isInHome = false"
+        @keyup.enter="store.counter= 1, $emit('callStartSearch'), store.isInHome = false"
         v-model="store.searchedMovies"
         type="text"
         placeholder="Cerca un film">
@@ -26,7 +26,7 @@ export default {
         <option value="tv">Series</option>
         <option value="movie">Movie</option>
       </select>
-      <div class="btn" @click="$emit('callStartSearch')" >
+      <div class="btn" @click="store.counter= 1, $emit('callStartSearch')" >
         <i class="fa-solid fa-magnifying-glass"> </i>
       </div>
     </label>

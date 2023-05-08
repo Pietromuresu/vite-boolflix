@@ -1,8 +1,10 @@
 <script>
 import {store} from '../assets/data/store';
+import { Swiper, SwiperSlide } from 'swiper/vue';
 import Card from './partials/Card.vue';
 import pmJumbotron from './partials/Jumbotron.vue'
-import { Swiper, SwiperSlide } from 'swiper/vue';
+import CardSlider from './partials/CardSlider.vue'
+import containerSearchedTitles from './partials/containerSearchedTitles.vue';
 
 
 export default {
@@ -11,7 +13,9 @@ export default {
     Card,
     pmJumbotron,
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    CardSlider,
+    containerSearchedTitles
   },
   data(){
     return{
@@ -65,99 +69,35 @@ export default {
 <template>
 
   <main>
-    <div v-if="store.isInHome" class="container-home mx-5 row">
-      <Swiper
-      :slides-per-view="1.5"
-      :space-between="50"
-      @swiper="onSwiper"
-      @slideChange="onSlideChange"
-      >
+    <!-- Home -->
+    <div class="home" v-if="store.isInHome">
 
-        <swiper-slide class="slide position-relative d-flex align-items-end " v-for="movie in store.popularMovies"
-        :key="movie.id">
-        
-        <img :src="getImage(movie, 'poster', movie.backdrop_path)" alt="">
-        <h3 class="position-absolute ms-3 "> {{ movie.title  }}</h3>
-        </swiper-slide>
-        
-      </Swiper>
-    </div>
+      <!-- Jumbotron -->
+      <div  class="container-home mx-5 row">
+        <pmJumbotron/>
+      </div>
       
-    
-    <h1 class="ms-5 mb-3">Popular Series</h1>
-    <div v-if="store.isInHome" class="container-home mx-5  row">
-      <Swiper
-      :slides-per-view="8"
-      :space-between="50"
-      @swiper="onSwiper"
-      @slideChange="onSlideChange"
       
-      >
-        <swiper-slide class="swiperpm" v-for="movie in store.popularSeries"
-      :key="movie.id">
+      <!-- Popular Movies -->
+      <h1 class="ms-5 my-3">Popular Movies</h1>
+      <div  class="container-home mx-5  row">
+        <CardSlider :where="store.popularMovies"/>
+      </div>
+      
+      <!-- Popular Series -->
+      <h1 class="ms-5 mb-5">Popular Series </h1>
+      <div  class="container-home mx-5  row">
+        <CardSlider :where="store.popularSeries"/>  
+      </div>
 
-          <Card
-          
-          
-          :card="movie"
-          :backdrop="getImage(movie, '', movie.poster_path)"
-          :hovBackdrop="getImage(movie, 'poster', movie.backdrop_path)"
-          :lang="movie.original_language"
-          :description="movie.overview"
-          :votes="getStars(movie)"
-          :stars="cleanStars()"
-          />  
-        </swiper-slide>
-      </Swiper>
-      
     </div>
     
-    <h1 class="ms-5 mb-3">Popular Movies</h1>
-    <div v-if="store.isInHome" class="container-home mx-5  row">
-      
-      <Swiper
-      :slides-per-view="8"
-      :space-between="50"
-      @swiper="onSwiper"
-      @slideChange="onSlideChange"
-      
-      >
-        <swiper-slide class="swiperpm" v-for="movie in store.popularMovies"
-      :key="movie.id">
-
-          <Card
-          
-          
-          :card="movie"
-          :backdrop="getImage(movie, '', movie.poster_path)"
-          :hovBackdrop="getImage(movie, 'poster', movie.backdrop_path)"
-          :lang="movie.original_language"
-          :description="movie.overview"
-          :votes="getStars(movie)"
-          :stars="cleanStars()"
-          />  
-        </swiper-slide>
-      </Swiper>
-      
-      
+    <!-- Searched Titles -->
+    <div v-else class="container-searched mx-5 pt-5 ">
+      <containerSearchedTitles @getApi="$emit('getApi')"/>
     </div>
+
     
-    <div v-else class="container-searched mx-5 row pt-5 ">
-      
-      <Card
-      v-for="movie in store.popularMovies"
-      :key="movie.id"
-      
-      :card="movie"
-      :backdrop="getImage(movie, '', movie.poster_path)"
-      :hovBackdrop="getImage(movie, 'poster', movie.backdrop_path)"
-      :lang="movie.original_language"
-      :description="movie.overview"
-      :votes="getStars(movie)"
-      :stars="cleanStars()"
-      /> 
-
-    </div>
   </main>
 
 </template>

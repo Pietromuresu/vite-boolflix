@@ -1,11 +1,16 @@
 <script>
+import { store } from '../assets/data/store';
 import Search from './Search.vue'
 export default {
   name: 'Header', 
 
   components:{
     Search,
-
+  },
+  data(){
+    return{
+      store
+    }
   }
 }
 </script>
@@ -14,7 +19,7 @@ export default {
 <header class="pm-header-container px-5 ">
   <div class=" h-100 d-flex justify-content-between  align-items-center">
     <div class="logo-container">
-      <img @click="$emit('getApi')" src="../../public/img/logo-boolflix.png" alt="">
+      <img @click=" store.counter = 1, $emit('getApi')" src="../../public/img/logo-boolflix.png" alt="">
     </div>
     
     <Search @callStartSearch="$emit('startSearch')"/>

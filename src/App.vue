@@ -4,14 +4,14 @@ import axios from '../node_modules/axios';
 
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
-import Main from './components/Main.vue'
+import Home from './components/Main.vue'
 
 export default {
   name: 'App',
   components: {
     Header,
     Footer,
-    Main,
+    Home,
 
 
   },
@@ -40,17 +40,22 @@ export default {
 
       axios.get(store.apiUrl, {
         params:{
-          query: store.searchedMovies,
+          query: store.searchedMovies ,
           language: 'it',
           page: store.counter
         }
       })
         .then(result => {
-
+          if(store.searchedMovies){
+            store.searchedTitles = result.data.results
+          }else if(store.searchedMovies == ''){
+            store.searchedTitles = []
+          }
+          
           if(type == 'popularSeries'){
             store.popularSeries = result.data.results   
 
-          }else {
+          }else if(type == 'popularMovies'){
             store.popularMovies = result.data.results   
 
           }
@@ -66,8 +71,16 @@ export default {
 </script>
 
 <template>
-  <Header @getApi="this.getApi('popularMovies'), store.searchedMovies= '', store.filterBy='', store.isInHome = true"  @startSearch="this.getApi(store.filterBy)" />
-  <Main @getMovies="this.getApi('popularMovies')" @getSeries="this.getApi('popularSeries')" />
+  <Header
+    @getApi="this.getApi('popularMovies'), store.searchedMovies= '', store.filterBy='', store.isInHome = true, store.searchedTitles= []"
+    @startSearch="this.getApi(store.filterBy)"/>
+  <Home
+    @getMovies="this.getApi('popularMovies')"
+    @getSeries="this.getApi('popularSeries')" 
+    @getApi="this.getApi(store.filterBy)"
+    />
+    
+    
   <Footer/>
 </template>
 
