@@ -50,7 +50,8 @@ export default {
     }
   },
   mounted(){
-    this.$emit('getApi')
+    this.$emit('getMovies')
+    this.$emit('getSeries')
   }
 
 
@@ -64,6 +65,40 @@ export default {
   <main>
     <div v-if="store.isInHome" class="container-home mx-5  row">
 
+      <Card
+      v-for="movie in store.popularMovies"
+      :key="movie.id"
+      
+      :card="movie"
+      :backdrop="getImage(movie, '', movie.poster_path)"
+      :hovBackdrop="getImage(movie, 'poster', movie.backdrop_path)"
+      :lang="movie.original_language"
+      :description="movie.overview !== '' || 'no desc'"
+      :votes="getStars(movie)"
+      :stars="cleanStars()"
+      />  
+      
+    </div>
+    <h1 class="ms-5 mb-3">Popular Series</h1>
+    <div v-if="store.isInHome" class="container-home mx-5  row">
+      <Card
+      v-for="movie in store.popularSeries"
+      :key="movie.id"
+      
+      :card="movie"
+      :backdrop="getImage(movie, '', movie.poster_path)"
+      :hovBackdrop="getImage(movie, 'poster', movie.backdrop_path)"
+      :lang="movie.original_language"
+      :description="movie.overview"
+      :votes="getStars(movie)"
+      :stars="cleanStars()"
+      />  
+      
+    </div>
+    
+    <h1 class="ms-5 mb-3">Popular Movies</h1>
+    <div v-if="store.isInHome" class="container-home mx-5  row">
+      
       <Card
       v-for="movie in store.popularMovies"
       :key="movie.id"
@@ -105,7 +140,12 @@ main{
   background-color: $card-container-bg;
   min-height: 100vh;
   padding-top: 130px;
+  color: white;
 
+  .container-searched,
+  .container-home{
+    flex-wrap: nowrap !important;
+  }
 
 }   
 

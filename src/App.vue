@@ -30,21 +30,31 @@ export default {
         store.apiUrl = store.apiUrlSearchMovie
       }else if(type === 'tv'){
         store.apiUrl = store.apiUrlSearchTV
-      }else if (type === 'popular'){
-        store.apiUrl = store.apiUrlPopular
+      }else if (type === 'popularMovies'){
+        store.apiUrl = store.apiUrlMoviePopular
+      }else if(type === 'popularSeries'){
+        store.apiUrl = store.apiUrlTvPopular
+        
       }
       console.log((type));
 
       axios.get(store.apiUrl, {
         params:{
           query: store.searchedMovies,
-          language: 'it-IT',
+          language: 'it',
           page: store.counter
         }
       })
         .then(result => {
-          store.popularMovies = result.data.results   
-          console.log(store.popularMovies);
+
+          if(type == 'popularSeries'){
+            store.popularSeries = result.data.results   
+
+          }else {
+            store.popularMovies = result.data.results   
+
+          }
+          console.log(store.popularMovies, store.popularSeries);
           
         })
     }
@@ -56,8 +66,8 @@ export default {
 </script>
 
 <template>
-  <Header @getApi="this.getApi('popular'), store.searchedMovies= '', store.filterBy=''"  @startSearch="this.getApi(store.filterBy)" />
-  <Main @getApi="this.getApi('popular')" />
+  <Header @getApi="this.getApi('popularMovies'), store.searchedMovies= '', store.filterBy=''"  @startSearch="this.getApi(store.filterBy)" />
+  <Main @getMovies="this.getApi('popularMovies')" @getSeries="this.getApi('popularSeries')" />
   <Footer/>
 </template>
 

@@ -33,12 +33,12 @@ export default {
       
       v-for="movie in store.popularMovies"
       :key="movie.id"
-      :backdrop="$emit('getImage')"
+      :backdrop="getImage(movie)"
       :lang="movie.original_language"
-      :originalTitle="$emit('getRightOriginalName')"
-      :title="$emit('getRightName')"
-      :votes="$emit('getStars')"
-      :stars=" $emit('cleanStars')"
+      :originalTitle="getRightOriginalName(movie)"
+      :title="getRightName(movie)"
+      :votes="getStars(movie)"
+      :stars="cleanStars()"
       />  
     </div>
 
