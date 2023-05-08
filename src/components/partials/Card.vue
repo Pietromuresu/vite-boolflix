@@ -77,15 +77,20 @@
   </template>
 
   <style lang="scss" scoped>
+  @use '../../scss/partials/vars' as *;
   .pm-card{
 
       min-height: 200px;
       max-width: 400px;
       margin-bottom: 20px ;
       line-height: 16px;
-
+      color: $text;
       .hover-card{
         text-align: center;
+
+        img{
+          max-width: 250px
+        }
       }
       .poster{
         max-width: 92px;

@@ -38,6 +38,7 @@ export default {
       axios.get(store.apiUrl, {
         params:{
           query: store.searchedMovies,
+          language: 'it-IT',
           page: store.counter
         }
       })
@@ -55,7 +56,7 @@ export default {
 </script>
 
 <template>
-  <Header @startSearch="this.getApi(store.filterBy)" />
+  <Header @getApi="this.getApi('popular'), store.searchedMovies= '', store.filterBy=''"  @startSearch="this.getApi(store.filterBy)" />
   <Main @getApi="this.getApi('popular')" />
   <Footer/>
 </template>

@@ -23,8 +23,8 @@ export default {
   methods: {
  
 
-    getImage(movie, img){
-      if(!movie.poster_path){
+    getImage(movie, img, frontBack){
+      if(!frontBack){
         return `/img/not-available-clipart-12.jpeg`
       }else if(img === ''){
         return `https://image.tmdb.org/t/p/w92${movie.poster_path}`
@@ -62,33 +62,34 @@ export default {
 <template>
 
   <main>
-    <div v-if="store.isInHome" class="container-home row">
+    <div v-if="store.isInHome" class="container-home mx-5  row">
 
       <Card
       v-for="movie in store.popularMovies"
       :key="movie.id"
       
       :card="movie"
-      :backdrop="getImage(movie, '')"
-      :hovBackdrop="getImage(movie, 'poster')"
+      :backdrop="getImage(movie, '', movie.poster_path)"
+      :hovBackdrop="getImage(movie, 'poster', movie.backdrop_path)"
       :lang="movie.original_language"
       :description="movie.overview"
       :votes="getStars(movie)"
       :stars="cleanStars()"
       />  
-
+      
     </div>
-
-    <div v-else class="container mx-auto row pt-5 ">
-
+    
+    <div v-else class="container-searched mx-5 row pt-5 ">
+      
       <Card
       v-for="movie in store.popularMovies"
       :key="movie.id"
       
       :card="movie"
-      :backdrop="getImage(movie, '')"
-      :hovBackdrop="getImage(movie, 'poster')"
+      :backdrop="getImage(movie, '', movie.poster_path)"
+      :hovBackdrop="getImage(movie, 'poster', movie.backdrop_path)"
       :lang="movie.original_language"
+      :description="movie.overview"
       :votes="getStars(movie)"
       :stars="cleanStars()"
       /> 
@@ -105,12 +106,7 @@ main{
   min-height: 100vh;
   padding-top: 130px;
 
-  .container, 
-  .container-home{
-    color: white;
 
-    
-  }
 }   
 
 </style>

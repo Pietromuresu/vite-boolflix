@@ -14,7 +14,7 @@ export default {
 <header class="pm-header-container px-5 ">
   <div class=" h-100 d-flex justify-content-between  align-items-center">
     <div class="logo-container">
-      <img src="../../public/img/logo-boolflix.png" alt="">
+      <img @click="$emit('getApi')" src="../../public/img/logo-boolflix.png" alt="">
     </div>
     
     <Search @callStartSearch="$emit('startSearch')"/>
