@@ -36,3 +36,16 @@ Trasformiamo quello che abbiamo fatto fino ad ora in una vera e propria webapp, 
 Un header che contiene logo e search bar
 Dopo aver ricercato qualcosa nella searchbar, i risultati appaiono sotto forma di “card” in cui lo sfondo è rappresentato dall’immagine di copertina (consiglio la poster_path con w342)
 Andando con il mouse sopra una card (on hover), appaiono le informazioni aggiuntive già prese nei punti precedenti più la overview
+
+## Tools: 
+- vue.js / vite
+- Bootstrap (npm)
+- Swiper (npm)
+-fontAwesome (cdn)
+
+
+# Functionality
+
+- se si clicca sul logo si torna alla home 
+- se si va in hover su un immagine questa si ingrandisce e fa si che si possa schiacciare la chevron down per leggere la descrizione del film
+- nel componente che contiene i risultati della ricerca si possono premere i bottoni next e prev che faranno incrementare il counter nello store. Il counter indica a che pagina dell'api siamo. Quando si clicca per la prima volta Next appaiono i bottoni prev e Back to Page 1 che faranno rispettivamente, tornare indietro l'array alla pagina precedente e tornare alla prima pagina 

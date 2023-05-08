@@ -57,7 +57,6 @@ export default {
 <template>
    <div class="pm-jumbotron">
 
-      
     <Swiper
       :slides-per-view="1.5"
       :space-between="50"

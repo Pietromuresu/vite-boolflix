@@ -73,6 +73,7 @@ export default {
     <div class="home" v-if="store.isInHome">
 
       <!-- Jumbotron -->
+      <h1 class="ms-5 my-3">Top 3</h1>
       <div  class="container-home mx-5 row">
         <pmJumbotron/>
       </div>
